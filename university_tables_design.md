@@ -33,7 +33,7 @@
     <type label="SET" length="1" sql="SET" quote=""/>
     <type label="Bit" length="0" sql="bit" quote=""/>
   </group>
-</datatypes><table x="235" y="276" name="students">
+</datatypes><table x="41" y="258" name="students">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -47,17 +47,21 @@
 <part>id</part>
 </key>
 </table>
-<table x="736" y="279" name="courses">
+<table x="733" y="272" name="courses">
 <row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="course_title" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="professor_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="professors" row="id" />
 </row>
+<row name="department_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="departments" row="id" />
+</row>
+<row name="course_title" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
 <row name="required_books" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
@@ -66,43 +70,82 @@
 <part>professor_id</part>
 </key>
 </table>
-<table x="446" y="276" name="courses_students">
+<table x="241" y="472" name="student_grades">
 <row name="student_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="students" row="id" />
 </row>
-<row name="course_id" null="1" autoincrement="0">
+<row name="section_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="courses" row="id" />
-</row>
-<key type="PRIMARY" name="">
-</key>
-</table>
-<table x="452" y="412" name="student_grades">
-<row name="student_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="students" row="id" />
-</row>
-<row name="course_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="courses" row="id" />
+<default>NULL</default><relation table="sections" row="id" />
 </row>
 <row name="grade_percentage" null="1" autoincrement="0">
 <datatype>DECIMAL</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>student_id</part>
-<part>course_id</part>
+<part>section_id</part>
 </key>
 </table>
-<table x="723" y="451" name="professors">
+<table x="734" y="468" name="professors">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="department_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="departments" row="id" />
+</row>
 <row name="name" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="department" null="1" autoincrement="0">
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="518" y="309" name="sections">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="course_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="courses" row="id" />
+</row>
+<row name="start_time" null="1" autoincrement="0">
+<datatype>TIME</datatype>
+<default>NULL</default></row>
+<row name="end_time" null="1" autoincrement="0">
+<datatype>TIME</datatype>
+<default>NULL</default></row>
+<row name="day_block" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="255" y="149" name="sections_students">
+<row name="student_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="students" row="id" />
+</row>
+<row name="section_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="sections" row="id" />
+</row>
+<row name="course_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="courses" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>student_id</part>
+<part>course_id</part>
+</key>
+</table>
+<table x="697" y="130" name="departments">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="department_name" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
@@ -110,4 +153,5 @@
 </key>
 </table>
 </sql>
+
 ```
