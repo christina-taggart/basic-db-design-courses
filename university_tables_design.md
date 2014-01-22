@@ -1,3 +1,5 @@
+<img src="http://i.imgur.com/UDOgsEE.png"/>
+
 ###Enforcing time constraints
 
 Enforcing time constraints (that is, students can't attend and teachers can't teach two sections whose times overlap,) could be approached in two different ways. The two approaches offer an
@@ -49,7 +51,7 @@ It would also be possible to enforce time constraints using Ruby.  Essentially w
     <type label="SET" length="1" sql="SET" quote=""/>
     <type label="Bit" length="0" sql="bit" quote=""/>
   </group>
-</datatypes><table x="41" y="258" name="students">
+</datatypes><table x="51" y="237" name="students">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -63,18 +65,10 @@ It would also be possible to enforce time constraints using Ruby.  Essentially w
 <part>id</part>
 </key>
 </table>
-<table x="733" y="272" name="courses">
+<table x="718" y="271" name="courses">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="professor_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="professors" row="id" />
-</row>
-<row name="department_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="departments" row="id" />
-</row>
 <row name="course_title" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
@@ -83,10 +77,9 @@ It would also be possible to enforce time constraints using Ruby.  Essentially w
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
-<part>professor_id</part>
 </key>
 </table>
-<table x="241" y="472" name="student_grades">
+<table x="251" y="345" name="student_grades">
 <row name="student_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="students" row="id" />
@@ -103,7 +96,7 @@ It would also be possible to enforce time constraints using Ruby.  Essentially w
 <part>section_id</part>
 </key>
 </table>
-<table x="734" y="468" name="professors">
+<table x="739" y="411" name="professors">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -118,13 +111,17 @@ It would also be possible to enforce time constraints using Ruby.  Essentially w
 <part>id</part>
 </key>
 </table>
-<table x="518" y="309" name="sections">
+<table x="499" y="300" name="sections">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="course_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="courses" row="id" />
+</row>
+<row name="professor_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="professors" row="id" />
 </row>
 <row name="start_time" null="1" autoincrement="0">
 <datatype>TIME</datatype>
@@ -137,27 +134,28 @@ It would also be possible to enforce time constraints using Ruby.  Essentially w
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
+<part>professor_id</part>
 </key>
 </table>
-<table x="255" y="149" name="sections_students">
+<table x="246" y="148" name="sections_students">
 <row name="student_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="students" row="id" />
 </row>
-<row name="section_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="sections" row="id" />
-</row>
 <row name="course_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="courses" row="id" />
+</row>
+<row name="section_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="sections" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>student_id</part>
 <part>course_id</part>
 </key>
 </table>
-<table x="697" y="130" name="departments">
+<table x="658" y="40" name="departments">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -168,6 +166,17 @@ It would also be possible to enforce time constraints using Ruby.  Essentially w
 <part>id</part>
 </key>
 </table>
+<table x="535" y="142" name="courses_departments">
+<row name="department_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="departments" row="id" />
+</row>
+<row name="course_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="courses" row="id" />
+</row>
+<key type="PRIMARY" name="">
+</key>
+</table>
 </sql>
-
 ```
