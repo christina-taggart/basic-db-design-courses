@@ -1,0 +1,20 @@
+Enforcing time constraints:
+
+Upon inserting a new row connecting student with section, it would be
+helpful to check for overlap of existing enrolled courses by:
+ 1. convert the currently enrolled classes into a ruby-object form.
+ 2. check the time of each currently enrolled class
+ 3. if any of the times of the enrolled classes overlaps with the course
+    send an error saying that the student cannot sign up for the course
+ 4. otherwise, allow the new course to be added to the schedule, and the row
+    to be added to the section_student association
+
+Cross-listing classes:
+
+Create an intermediate "true_classes" table that will:
+  1. have a one to many relationship with class to maintain all cross listings
+  2. have a one to many relationship with sections to monitor the same sections
+      regardless of cross listing
+
+See sql_phase2_design.png and sql_design_phase2.md
+
