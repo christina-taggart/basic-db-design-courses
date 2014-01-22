@@ -1,4 +1,9 @@
-![database](http://imgur.com/uEW56kM.png)
+![database](http://imgur.com/rI7ayfE.png)
+
+Enforcing time restraints: Our design incorporates a start and end DATETIME column for each section. This column will be able to infer any overlap of student or teacher schedules. This inference can then be picked up by writing a simple ruby method to validate that a teacher trying to join a certain section isn't already enrolled in
+a section whose time would overlap with the currently registered sections for that teacher.
+
+The only real cost of verifying schedules is that you would have to write ruby methods to wrap SQL commands and queries. Since you're already querying the database for the initial data this verification would not make the program as a whole more expensive from a computational standpoint.
 
 ```XML
 <?xml version="1.0" encoding="utf-8" ?>
@@ -49,7 +54,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="752" y="184" name="teachers">
+<table x="210" y="319" name="teachers">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -60,7 +65,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="489" y="22" name="sections">
+<table x="446" y="55" name="sections">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -110,28 +115,40 @@
 <part>id</part>
 </key>
 </table>
-<table x="662" y="29" name="classes">
+<table x="466" y="317" name="classes">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="subject" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="department_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="departments" row="id" />
-</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="809" y="65" name="departments">
+<table x="784" y="372" name="departments">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="name" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="677" y="161" name="classes_departments">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="department_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="departments" row="id" />
+</row>
+<row name="classes_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="classes" row="id" />
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
