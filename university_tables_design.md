@@ -1,3 +1,19 @@
+###Enforcing time constraints
+
+Enforcing time constraints (that is, students can't attend and teachers can't teach two sections whose times overlap,) could be approached in two different ways. The two approaches offer an
+example of the typical memory/processing tradeoff.
+
+First, the time constraints could be hard-coded into the database itself. We could create a
+table 'students_schedules' that had fields that store student_id, start_time, end_time, and
+day_block. We could then turn these fields into combined primary keys to ensure that there are
+unique combinations of each field, thereby enforcing time constraints for each student. The
+drawback to this approach is that it requires the duplication of existing data (start_time,
+end_time, etc.)
+
+It would also be possible to enforce time constraints using Ruby.  Essentially when a student would "enroll" in a section of a course, the program would check all of that student's existing courses, then check the day/time information for each course and ensure that there were no identical combinations of data for a particular student.  The advantage to this approach is that it saves memory by not duplicating data, however it would obviously take more processing power to accomplish.
+
+###Table Design
+
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- SQL XML created by WWW SQL Designer, http://code.google.com/p/wwwsqldesigner/ -->
