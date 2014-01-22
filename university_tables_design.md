@@ -7,7 +7,7 @@ example of the typical memory/processing tradeoff.
 
 First, the time constraints could be hard-coded into the database itself. We could create a
 table 'students_schedules' that had fields that store student_id, start_time, end_time, and
-day_block. We could then turn these fields into combined primary keys to ensure that there are
+day_block. We could then turn these fields into combined primary keys to ensure that there were
 unique combinations of each field, thereby enforcing time constraints for each student. The
 drawback to this approach is that it requires the duplication of existing data (start_time,
 end_time, etc.)
